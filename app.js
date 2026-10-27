@@ -1,249 +1,186 @@
 
-const catalog = {
+const categories = {
   tights: {
     title: "Колготки",
     items: [
       { name: "Чёрные", color: "#17131d" },
-      { name: "Бежевые", color: "#d8b091" },
-      { name: "Белые", color: "#f4edf5" },
-      { name: "В горошек", color: "#35212c" },
-      { name: "Сетка", color: "#6e5265" },
-      { name: "Глянцевые", color: "#211923" },
-      { name: "Графитовые", color: "#55505f" },
-      { name: "Серые", color: "#a5a0ad" },
-      { name: "Бордовые", color: "#741e3b" }
+      { name: "Белые", color: "#f4edf2" },
+      { name: "Телесные", color: "#d8a58d" },
+      { name: "Розовые", color: "#ed91c5" },
+      { name: "Бордовые", color: "#781e43" },
+      { name: "Серые", color: "#89838e" }
     ]
   },
   socks: {
     title: "Носки",
     items: [
-      { name: "Белые", color: "#f7f3f7" },
-      { name: "Чёрные", color: "#19151d" },
-      { name: "Розовые", color: "#ee9dc9" },
-      { name: "Полосатые", color: "#f1c7e6" },
-      { name: "Серые", color: "#9895a5" },
-      { name: "Бордовые", color: "#762342" },
-      { name: "Гольфы", color: "#eee6ef" },
-      { name: "Спортивные", color: "#24202b" },
-      { name: "Пушистые", color: "#f8e7f5" }
+      { name: "Белые", color: "#fff7fa" },
+      { name: "Чёрные", color: "#17131d" },
+      { name: "Розовые", color: "#f28bc5" },
+      { name: "Голубые", color: "#80c7ed" },
+      { name: "Фиолетовые", color: "#9360c7" },
+      { name: "Красные", color: "#d63a50" }
     ]
   },
   stockings: {
     title: "Чулки",
     items: [
-      { name: "Чёрные", color: "#211723" },
-      { name: "Бежевые", color: "#d6ad91" },
-      { name: "Белые", color: "#f6edf6" },
-      { name: "С кружевом", color: "#3c243b" },
-      { name: "Красные", color: "#a12b4d" },
-      { name: "Сетка", color: "#75536c" },
-      { name: "Серые", color: "#8d8797" },
-      { name: "Розовые", color: "#efadd5" },
-      { name: "Фиолетовые", color: "#7441a3" }
+      { name: "Чёрные", color: "#211323" },
+      { name: "Белые", color: "#fff6fa" },
+      { name: "Красные", color: "#bb234a" },
+      { name: "Серые", color: "#918b99" },
+      { name: "Синие", color: "#344fa8" },
+      { name: "Золотые", color: "#d9ad56" }
     ]
   },
   tops: {
-    title: "Верх одежды",
+    title: "Верх",
     items: [
-      { name: "Чёрный", color: "#28202d" },
-      { name: "Белый", color: "#f2eaf2" },
-      { name: "Красный", color: "#a42c4c" },
-      { name: "Розовый", color: "#df81ca" },
-      { name: "Фиолетовый", color: "#713a91" },
-      { name: "Золотой", color: "#c69a47" },
-      { name: "Синий", color: "#344d9b" },
-      { name: "Изумрудный", color: "#28795e" },
-      { name: "Бордовый", color: "#69213d" }
+      { name: "Королевский", color: "#762b64" },
+      { name: "Розовый", color: "#ef83bd" },
+      { name: "Белый", color: "#fff5f5" },
+      { name: "Чёрный", color: "#211923" },
+      { name: "Голубой", color: "#6db7e4" },
+      { name: "Красный", color: "#bd2946" }
     ]
   },
   skirts: {
-    title: "Юбки и платья",
+    title: "Юбки",
     items: [
-      { name: "Королевская", color: "#642447" },
-      { name: "Чёрная", color: "#211923" },
-      { name: "Белая", color: "#eee6ef" },
-      { name: "Красная", color: "#a52a49" },
-      { name: "Розовая", color: "#df8acb" },
-      { name: "Золотая", color: "#b98b3f" },
-      { name: "Синяя", color: "#344c8b" },
-      { name: "Изумрудная", color: "#246a50" },
-      { name: "Фиолетовая", color: "#713b91" }
+      { name: "Бордовая", color: "#791d42" },
+      { name: "Розовая", color: "#ed8cc4" },
+      { name: "Чёрная", color: "#201923" },
+      { name: "Золотая", color: "#c99b47" },
+      { name: "Белая", color: "#fff5f5" },
+      { name: "Синяя", color: "#364da4" }
+    ]
+  },
+  shoes: {
+    title: "Обувь",
+    items: [
+      { name: "Чёрные", color: "#201820" },
+      { name: "Красные", color: "#bd2946" },
+      { name: "Золотые", color: "#d8ad58" },
+      { name: "Белые", color: "#fff5f5" },
+      { name: "Розовые", color: "#ed8cc4" },
+      { name: "Синие", color: "#344fa8" }
     ]
   }
 };
 
-const defaults = {
-  tights: 0,
-  socks: -1,
-  stockings: -1,
-  tops: 0,
-  skirts: 0
+const state = {
+  category: "tights",
+  selected: {},
+  look: 1
 };
 
-let selected = { ...defaults };
-let category = "tights";
-let pose = 0;
-
-const $ = id => document.getElementById(id);
-
-function message(text) {
-  $("status").textContent = text;
-}
+const itemsEl = document.getElementById("items");
+const categoryTitle = document.getElementById("categoryTitle");
+const statusEl = document.getElementById("status");
+const lookLabel = document.getElementById("lookLabel");
+const stage = document.querySelector(".stage");
 
 function renderItems() {
-  const data = catalog[category];
+  const category = categories[state.category];
 
-  $("categoryTitle").textContent = data.title;
-  $("itemCount").textContent = data.items.length + " вариантов";
+  categoryTitle.textContent = category.title;
+  itemsEl.replaceChildren();
 
-  $("items").innerHTML = data.items.map((item, index) => `
-    <button class="item ${selected[category] === index ? "selected" : ""}"
-      data-index="${index}" aria-pressed="${selected[category] === index}">
-      <span class="check">✓</span>
-      <span class="swatch">
-        <span class="swatch-shape" style="--swatch:${item.color}"></span>
-      </span>
-      <span class="item-name">${item.name}</span>
-    </button>
-  `).join("");
+  category.items.forEach((item, index) => {
+    const button = document.createElement("button");
+    button.className = "item";
 
-  document.querySelectorAll(".item").forEach(button => {
+    if (state.selected[state.category] === index) {
+      button.classList.add("selected");
+    }
+
+    const swatch = document.createElement("span");
+    swatch.className = "swatch";
+    swatch.style.background = item.color;
+
+    const name = document.createElement("span");
+    name.textContent = item.name;
+
+    button.append(swatch, name);
+
     button.addEventListener("click", () => {
-      selected[category] = Number(button.dataset.index);
-      applyLook();
+      state.selected[state.category] = index;
+      state.look++;
+      lookLabel.textContent = `Образ № ${state.look}`;
       renderItems();
-      message("Выбрано: " + data.items[selected[category]].name);
+
+      statusEl.textContent =
+        `${category.title}: ${item.name}. Выбор сохранён в текущем образе.`;
     });
+
+    itemsEl.appendChild(button);
+  });
+
+  document.querySelectorAll("[data-category]").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.category === state.category
+    );
   });
 }
 
-function applyLook() {
-  const tights = catalog.tights.items[selected.tights];
-  const socks = catalog.socks.items[selected.socks];
-  const stockings = catalog.stockings.items[selected.stockings];
-  const top = catalog.tops.items[selected.tops];
-  const skirt = catalog.skirts.items[selected.skirts];
-
-  document.querySelectorAll(".stocking").forEach(el => {
-    el.style.background = "transparent";
-    el.style.backgroundImage = "none";
-    el.style.opacity = "1";
-    el.style.height = "100%";
-    el.style.top = "0";
-  });
-
-  if (selected.tights >= 0 && tights) {
-    document.querySelectorAll(".stocking").forEach(el => {
-      el.style.background = tights.color;
-      el.style.opacity = ".94";
-    });
-  }
-
-  if (selected.stockings >= 0 && stockings) {
-    document.querySelectorAll(".stocking").forEach(el => {
-      el.style.background = stockings.color;
-      el.style.height = "65%";
-      el.style.top = "0";
-    });
-  }
-
-  if (selected.socks >= 0 && socks) {
-    document.querySelectorAll(".stocking").forEach(el => {
-      el.style.background = socks.color;
-      el.style.height = "35%";
-      el.style.top = "65%";
-    });
-  }
-
-  $("topClothes").style.background = top.color;
-  $("skirt").style.background = skirt.color;
-
-  const labels = [
-    tights.name,
-    socks ? socks.name + " носки" : "",
-    stockings ? stockings.name + " чулки" : "",
-    top.name + " верх",
-    skirt.name
-  ].filter(Boolean);
-
-  $("lookName").textContent = "Образ: " + labels.slice(0, 2).join(" · ");
-}
-
-document.querySelectorAll(".category").forEach(button => {
+document.querySelectorAll("[data-category]").forEach(button => {
   button.addEventListener("click", () => {
-    category = button.dataset.category;
-
-    document.querySelectorAll(".category").forEach(el => {
-      el.classList.toggle("active", el === button);
-    });
-
+    state.category = button.dataset.category;
     renderItems();
-    message("");
+    statusEl.textContent = `Выбрана категория: ${categories[state.category].title}`;
   });
 });
 
-$("animateBtn").addEventListener("click", () => {
-  $("character").classList.toggle("dancing");
-  message(
-    $("character").classList.contains("dancing")
-      ? "Анимация включена"
-      : "Анимация выключена"
-  );
-});
-
-$("poseBtn").addEventListener("click", () => {
-  pose = 1 - pose;
-  $("character").classList.toggle("pose-two", pose === 1);
-  $("poseBtn").textContent = pose ? "♡ Поза 2" : "♡ Поза";
-});
-
-$("resetBtn").addEventListener("click", () => {
-  selected = { ...defaults };
-  $("character").classList.remove("dancing", "pose-two");
-  pose = 0;
-  $("poseBtn").textContent = "♡ Поза";
-  applyLook();
-  renderItems();
-  message("Начальный образ восстановлен");
-});
-
-$("randomBtn").addEventListener("click", () => {
-  Object.keys(catalog).forEach(key => {
-    selected[key] = Math.floor(Math.random() * catalog[key].items.length);
+document.getElementById("randomBtn").addEventListener("click", () => {
+  Object.keys(categories).forEach(key => {
+    state.selected[key] = Math.floor(
+      Math.random() * categories[key].items.length
+    );
   });
-  applyLook();
+
+  state.category = "tights";
+  state.look++;
+  lookLabel.textContent = `Образ № ${state.look}`;
   renderItems();
-  message("Новый случайный образ готов!");
+  statusEl.textContent = "Новый случайный образ выбран!";
 });
 
-$("saveBtn").addEventListener("click", () => {
+document.getElementById("saveBtn").addEventListener("click", () => {
   try {
-    localStorage.setItem("royalStyleLook", JSON.stringify(selected));
-    message("✓ Образ сохранён на этом устройстве");
-  } catch {
-    message("Не удалось сохранить образ в браузере");
+    localStorage.setItem("royalWardrobeSave", JSON.stringify(state));
+    statusEl.textContent = "Образ сохранён на этом устройстве!";
+  } catch (error) {
+    statusEl.textContent = "Не удалось сохранить образ в браузере.";
   }
 });
 
-$("soundBtn").addEventListener("click", () => {
-  message("Звуковые эффекты пока не подключены");
+document.getElementById("poseBtn").addEventListener("click", () => {
+  stage.classList.toggle("pose");
+  statusEl.textContent = stage.classList.contains("pose")
+    ? "Эффект позы включён."
+    : "Эффект позы выключен.";
 });
 
-// Восстанавливаем сохранённый образ при следующем запуске.
+document.getElementById("animationBtn").addEventListener("click", () => {
+  stage.classList.toggle("moving");
+  statusEl.textContent = stage.classList.contains("moving")
+    ? "Анимация включена."
+    : "Анимация выключена.";
+});
+
 try {
-  const saved = JSON.parse(localStorage.getItem("royalStyleLook"));
-  if (saved && typeof saved === "object") {
-    Object.keys(catalog).forEach(key => {
-      const value = saved[key];
-      if (Number.isInteger(value) &&
-          value >= -1 && value < catalog[key].items.length) {
-        selected[key] = value;
-      }
-    });
+  const saved = localStorage.getItem("royalWardrobeSave");
+
+  if (saved) {
+    const parsed = JSON.parse(saved);
+
+    if (parsed && parsed.selected && categories[parsed.category]) {
+      Object.assign(state, parsed);
+    }
   }
-} catch {
-  selected = { ...defaults };
+} catch (error) {
+  // Игра продолжит работать, даже если сохранение недоступно.
 }
 
-applyLook();
 renderItems();
