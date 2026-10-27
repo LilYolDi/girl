@@ -3,94 +3,51 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#160d22">
   <title>Королевский гардероб</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="game">
-    <header class="topbar">
-      <div class="brand">
-        <span class="crown">♛</span>
-        <div><strong>ROYAL STYLE</strong><small>Королевский гардероб</small></div>
-      </div>
-      <button id="soundBtn" class="round-btn" aria-label="Звук">♫</button>
-    </header>
+  <header class="topbar">
+    <div class="crown">♛</div>
+    <div>
+      <h1>Королевский гардероб</h1>
+      <p>Создай свой идеальный образ</p>
+    </div>
+  </header>
 
-    <section class="stage" id="stage">
-      <div class="room-light"></div>
-      <div class="room-title">ROYAL PALACE</div>
-      <div class="throne">
-        <div class="throne-top">♛</div>
-        <div class="throne-back"></div>
-        <div class="throne-seat"></div>
-        <div class="throne-foot"></div>
-      </div>
-
-      <div class="character" id="character">
-        <div class="hair"></div>
-        <div class="head">
-          <div class="tiara">♛</div>
-          <div class="face">
-            <span class="eye left"></span><span class="eye right"></span>
-            <span class="nose"></span><span class="mouth"></span>
-          </div>
-        </div>
-        <div class="neck"></div>
-        <div class="arms"><i></i><b></b></div>
-        <div class="torso">
-          <div class="top-clothes" id="topClothes"></div>
-          <div class="waist"></div>
-        </div>
-        <div class="skirt" id="skirt"></div>
-        <div class="legs">
-          <div class="leg leg-one"><span class="stocking"></span></div>
-          <div class="leg leg-two"><span class="stocking"></span></div>
-        </div>
-        <div class="shoes">
-          <span></span><span></span>
-        </div>
-      </div>
-
-      <div class="stage-label" id="lookName">Образ № 1</div>
-      <div class="stage-actions">
-        <button id="poseBtn">♡ Поза</button>
-        <button id="animateBtn">▶ Анимация</button>
-      </div>
+  <main>
+    <section class="stage">
+      <img id="girl" src="girl.jpg" alt="Девушка на королевском троне">
+      <div class="look-label" id="lookLabel">Образ № 1</div>
+      <button id="poseBtn">♡ Поза</button>
+      <button id="animationBtn">▶ Анимация</button>
     </section>
 
     <section class="wardrobe">
-      <div class="wardrobe-heading">
-        <div>
-          <span class="eyebrow">YOUR COLLECTION</span>
-          <h1>Гардероб</h1>
-        </div>
-        <button id="resetBtn" class="reset-btn">↻ Сброс</button>
-      </div>
+      <h2>Гардероб</h2>
 
-      <nav class="categories" aria-label="Категории одежды">
-        <button class="category active" data-category="tights"><span>♧</span>Колготки</button>
-        <button class="category" data-category="socks"><span>◒</span>Носки</button>
-        <button class="category" data-category="stockings"><span>♧</span>Чулки</button>
-        <button class="category" data-category="tops"><span>♙</span>Верх</button>
-        <button class="category" data-category="skirts"><span>♜</span>Юбки</button>
+      <nav class="categories">
+        <button data-category="tights">Колготки</button>
+        <button data-category="socks">Носки</button>
+        <button data-category="stockings">Чулки</button>
+        <button data-category="tops">Верх</button>
+        <button data-category="skirts">Юбки</button>
+        <button data-category="shoes">Обувь</button>
       </nav>
 
-      <div class="selection-info">
-        <span id="categoryTitle">Колготки</span>
-        <span id="itemCount">9 вариантов</span>
-      </div>
-
+      <h3 id="categoryTitle">Колготки</h3>
       <div id="items" class="items"></div>
 
-      <div class="bottom-actions">
-        <button id="randomBtn" class="secondary-btn">✦ Случайный образ</button>
-        <button id="saveBtn" class="primary-btn">♧ Сохранить образ</button>
+      <div class="actions">
+        <button id="randomBtn">✦ Случайный образ</button>
+        <button id="saveBtn">♛ Сохранить образ</button>
       </div>
-      <p id="status" class="status" role="status"></p>
+      <p id="status">Выбери категорию одежды</p>
     </section>
   </main>
+
   <script src="app.js"></script>
 </body>
 </html>
